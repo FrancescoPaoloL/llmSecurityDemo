@@ -1,0 +1,33 @@
+# Build artifacts
+build/
+cmake-build-*/
+*.o
+*.a
+*.so
+
+# Models
+models/*.gguf
+models/*.bin
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# Node
+node_modules/
+npm-debug.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# custom folders to ignore
+/tmp
+
