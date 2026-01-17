@@ -31,6 +31,7 @@ Thumbs.db
 # custom folders to ignore
 /api/api__venv
 /tmp
+notes.txt
 
 
 # ignore llama.cpp binaries and libraries
