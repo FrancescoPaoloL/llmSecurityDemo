@@ -32,3 +32,9 @@ Thumbs.db
 /api/api__venv
 /tmp
 
+
+# ignore llama.cpp binaries and libraries
+llama.cpp/build/bin/
+llama.cpp/build/lib/
+llama.cpp/models/*.gguf
+
