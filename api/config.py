@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 '''
-    create a .env file such as:
+Please make sure to create a .env file first in this directory, like:
 
     BINARY_PATH=<absolute path for local or debugging>
     MODEL_PATH=<abolute path for local or debugging>
