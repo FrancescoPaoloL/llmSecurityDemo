@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>OWASP LLM Security Demo</h1>
+            <p class="subtitle">Test LLM vulnerabilities based on OWASP Top 10</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <label for="prompt">Enter your test prompt:</label>
+<!--                <textarea
+                    id="prompt"
+                    rows="4"
+                    placeholder="Examples:Topic: web security\nList 5 blog post titles for beginners.\n\nTopic: Explanation\nExplain SQL injection in simple words.Use short sentences."
+                    ></textarea> -->
+
+        <textarea id="prompt" rows="8"></textarea>
+                <script>
+                    const placeholderText = `Examples:
+                            Topic: web security
+                            List 5 blog post titles for beginners.
+
+                            Topic: Explanation
+                            Explain SQL injection in simple words. Use short sentences.`;
+
+                    document.getElementById('prompt').placeholder = placeholderText;
+                </script>
+
+                <button id="testBtn" class="btn-primary">
+                    Test Vulnerability
+                </button>
+            </div>
+
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Analyzing prompt... (~20 seconds)</p>
+            </div>
+
+            <div id="results" class="results" style="display: none;">
+                <h2>Results</h2>
+
+                <div class="result-section">
+                    <h3>Category</h3>
+                    <div id="category" class="category-badge"></div>
+                </div>
+
+                <div class="result-section">
+                    <h3>Model Response</h3>
+                    <div id="response" class="response-text"></div>
+                </div>
+
+                <div class="result-section">
+                    <h3>Metadata</h3>
+                    <div id="metadata" class="metadata"></div>
+                </div>
+            </div>
+
+            <div id="error" class="error" style="display: none;">
+                <h3>Error!!!</h3>
+                <p id="errorMsg"></p>
+            </div>
+        </main>
+
+        <footer>
+            <p>Educational project - OWASP LLM Top 10 Implementation</p>
+            <p class="categories">
+                <span class="cat-llm01">LLM01: Prompt Injection</span>
+                <span class="cat-llm02">LLM02: Insecure Output</span>
+                <span class="cat-llm04">LLM04: Model DoS</span>
+                <span class="cat-llm06">LLM06: Info Disclosure</span>
+            </p>
+        </footer>
+    </div>
+
+    <script src="/js/form-handler.js"></script>
+</body>
+</html>
+

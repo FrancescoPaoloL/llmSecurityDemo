@@ -1,0 +1,21 @@
+{
+  "name": "llmsecuritydemo-frontend",
+  "version": "1.0.0",
+  "description": "OWASP LLM Security Demo Frontend",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "ejs": "^3.1.10",
+    "axios": "^1.7.9"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "",
+  "license": "MIT"
+}
+
