@@ -10,8 +10,9 @@ You enter a prompt, the tool:
 3. Returns the OWASP category detected
 
 ## Quick Start
+
+### Local (Docker)
 ```bash
-# Build and run with Docker
 cd docker
 sudo docker-compose build
 sudo docker-compose up -d
@@ -19,6 +20,19 @@ sudo docker-compose up -d
 # Open browser
 http://localhost:3000
 ```
+
+### Docker Hub
+```bash
+docker pull francescopaololezza/owasp-llm-demo:v3
+docker run -d -p 3000:3000 -p 5000:5000 -p 8081:8081 francescopaololezza/owasp-llm-demo:v3
+
+# Open browser
+http://localhost:3000
+```
+
+### Azure
+
+See [infra/azure/README.md](infra/azure/README.md) for Terraform deployment.
 
 ## Architecture
 ```
@@ -48,7 +62,8 @@ See [docs/architecture.md](docs/architecture.md) for details.
 ├── api/          # Flask API
 ├── docker/       # Docker configuration
 ├── docs/         # Documentation
-└── frontend/     # Node.js + EJS UI
+├── frontend/     # Node.js + EJS UI
+└── infra/azure/  # Terraform for Azure deployment
 ```
 
 ## C++ Source Code

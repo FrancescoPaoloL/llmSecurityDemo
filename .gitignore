@@ -28,6 +28,13 @@ npm-debug.log
 .DS_Store
 Thumbs.db
 
+# Azure
+infra/azure/.terraform/
+infra/azure/*.tfstate
+infra/azure/*.tfstate.backup
+infra/azure/.terraform.lock.hcl
+
+
 # custom folders to ignore
 /api/api__venv
 /llama.cpp/
