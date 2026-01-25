@@ -27,7 +27,9 @@ ENV LD_LIBRARY_PATH=/app/binary:$LD_LIBRARY_PATH
 
 # Copy model (409MB)
 RUN mkdir -p /app/models
-COPY --chown=nobody:nogroup ./llama.cpp/models/qwen2.5-0.5b-instruct-q4_0.gguf /app/models/
+#COPY --chown=nobody:nogroup ./llama.cpp/models/qwen2.5-0.5b-instruct-q4_0.gguf /app/models/
+COPY --chown=nobody:nogroup ./models/qwen2.5-0.5b-instruct-q4_0.gguf /app/models/
+
 
 # Copy API code
 COPY --chown=nobody:nogroup ./api /app/api
