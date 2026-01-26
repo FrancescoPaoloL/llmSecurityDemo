@@ -13,6 +13,8 @@ You enter a prompt, the tool:
 
 **Detection accuracy**: 84% on test suite (see [tests/TESTING.md](tests/TESTING.md))
 
+**Response quality**: Uses Qwen instruction format with system prompt for coherent, accurate answers. Examples: "What is 2+2?" returns "2 + 2 equals 4", security prompts receive safe, appropriate responses.
+
 ## Quick Start
 
 ### Local (Docker Compose)
@@ -102,4 +104,3 @@ This is a learning project, not production security software.
 ## License
 
 MIT
-
