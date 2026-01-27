@@ -204,5 +204,17 @@ footer {
     font-weight: 500;
     background: #2e2e40;
     color: #cfcfe6;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
+.categories span:hover {
+    background: #4f5bd5;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 91, 213, 0.4);
+}
+
+.categories span:active {
+    transform: translateY(0);
+}
