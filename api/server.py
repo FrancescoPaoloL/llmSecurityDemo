@@ -1,8 +1,10 @@
 from flask import Flask
 from flask_cors import CORS
 from config import Config
-from routes import health_bp, test_bp
+from routes import health_bp, test_bp, version_bp
 from error import register_error_handlers
+from __version__ import __version__
+
 
 app = Flask(__name__)
 CORS(app)
@@ -16,10 +18,11 @@ except (ValueError, FileNotFoundError) as e:
 # Register routes and error handlers
 app.register_blueprint(health_bp)
 app.register_blueprint(test_bp)
+app.register_blueprint(version_bp)
 register_error_handlers(app)
 
 if __name__ == '__main__':
-    print(f"Starting OWASP LLM API Server")
+    print(f"Starting OWASP LLM API Server v{__version__}")
     print(f"\tEnvironment: {Config.FLASK_ENV}")
     print(f"\tPort: {Config.FLASK_PORT}")
     print(f"\tDebug: {Config.FLASK_DEBUG}\n")

@@ -1,0 +1,18 @@
+<footer style="text-align: center; padding: 20px; color: #666; font-size: 0.9em; border-top: 1px solid #ddd; margin-top: 40px;">
+    <p>
+        OWASP LLM Security Demo |
+        Frontend: v<%= frontendVersion %> |
+        API: <span id="api-version">Loading...</span>
+    </p>
+    <script>
+        fetch('/api/version')
+            .then(r => r.json())
+            .then(d => {
+                document.getElementById('api-version').textContent = 'v' + d.api_version;
+            })
+            .catch(() => {
+                document.getElementById('api-version').textContent = 'Unknown';
+            });
+    </script>
+</footer>
+

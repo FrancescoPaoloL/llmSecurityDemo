@@ -1,6 +1,6 @@
 {
   "name": "llmsecuritydemo-frontend",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "description": "OWASP LLM Security Demo Frontend",
   "main": "app.js",
   "scripts": {

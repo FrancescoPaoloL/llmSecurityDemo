@@ -1,3 +1,4 @@
+from __version__ import __version__ as API_VERSION
 import os
 from pathlib import Path
 from dotenv import load_dotenv

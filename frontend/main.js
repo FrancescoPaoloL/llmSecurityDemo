@@ -3,6 +3,8 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
+const packageJson = require('./package.json');
+console.log(`Frontend version: ${packageJson.version}`);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -74,6 +76,18 @@ app.post('/api/test', async (req, res) => {
             error: 'Internal server error',
             detail: error.message
         });
+    }
+});
+
+
+// Version endpoint proxy
+app.get('/api/version', async (req, res) => {
+    try {
+        const response = await axios.get(`${FLASK_API_URL}/api/version`);
+        res.json(response.data);
+    } catch (error) {
+        console.error('Version check error:', error.message);
+        res.status(500).json({ error: 'Unable to fetch version' });
     }
 });
 
