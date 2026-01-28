@@ -58,7 +58,6 @@ cd /app/frontend
 node main.js &
 FRONTEND_PID=$!
 
-# Wait for frontend
 sleep 3
 
 echo "Starting Cloudflare Tunnel..."
@@ -67,7 +66,8 @@ TUNNEL_PID=$!
 
 # Wait and extract tunnel URL
 sleep 5
-TUNNEL_URL=$(grep -o 'https://.*\.trycloudflare\.com' /tmp/tunnel.log | head -1)
+TUNNEL_URL=$(grep -Eo 'https://[a-z-]+\.trycloudflare\.com' /tmp/tunnel.log | head -1)
+
 
 if [ -n "$TUNNEL_URL" ]; then
     echo ""
@@ -84,5 +84,5 @@ fi
 trap "kill $LLAMA_PID $FLASK_PID $FRONTEND_PID $TUNNEL_PID 2>/dev/null" EXIT
 
 # Keep container running
-wait $FRONTEND_PID
+wait
 
