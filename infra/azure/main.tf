@@ -42,3 +42,12 @@ output "url" {
   value = "http://${azurerm_container_group.main.fqdn}:3000"
 }
 
+output "tunnel_url" {
+  value       = "Check container logs for HTTPS tunnel URL"
+  description = "Cloudflare Tunnel URL (dynamic, see logs)"
+}
+
+output "logs_command" {
+  value       = "az container logs --resource-group <RESOURCE_GROUP_NAME> --name <CONTAINER_NAME> | grep 'HTTPS Tunnel'"
+  description = "Command to retrieve tunnel URL from logs"
+}

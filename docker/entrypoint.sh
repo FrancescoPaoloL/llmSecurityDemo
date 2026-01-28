@@ -47,17 +47,42 @@ FLASK_PID=$!
 echo "Waiting for Flask API..."
 for i in {1..30}; do
     if curl -s http://localhost:5000/health > /dev/null 2>&1; then
-        echo "✅ Flask API ready!"
+        echo "Flask API ready!"
         break
     fi
     sleep 1
 done
 
-# Cleanup on exit
-trap "kill $LLAMA_PID $FLASK_PID" EXIT
-
-# Start Node.js frontend in foreground
 echo "Starting Node.js frontend on port 3000..."
 cd /app/frontend
-exec node main.js
+node main.js &
+FRONTEND_PID=$!
+
+# Wait for frontend
+sleep 3
+
+echo "Starting Cloudflare Tunnel..."
+cloudflared tunnel --url http://localhost:3000 --no-autoupdate > /tmp/tunnel.log 2>&1 &
+TUNNEL_PID=$!
+
+# Wait and extract tunnel URL
+sleep 5
+TUNNEL_URL=$(grep -o 'https://.*\.trycloudflare\.com' /tmp/tunnel.log | head -1)
+
+if [ -n "$TUNNEL_URL" ]; then
+    echo ""
+    echo "=========================================="
+    echo "HTTPS Tunnel Active!"
+    echo "URL: $TUNNEL_URL"
+    echo "=========================================="
+    echo ""
+else
+    echo "Warning: Could not detect tunnel URL, check /tmp/tunnel.log"
+fi
+
+# Cleanup on exit
+trap "kill $LLAMA_PID $FLASK_PID $FRONTEND_PID $TUNNEL_PID 2>/dev/null" EXIT
+
+# Keep container running
+wait $FRONTEND_PID
 
