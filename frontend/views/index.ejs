@@ -16,21 +16,9 @@
         <main>
             <div class="input-section">
                 <label for="prompt">Enter your test prompt:</label>
-<!--                <textarea
-                    id="prompt"
-                    rows="4"
-                    placeholder="Examples:Topic: web security\nList 5 blog post titles for beginners.\n\nTopic: Explanation\nExplain SQL injection in simple words.Use short sentences."
-                    ></textarea> -->
-
-        <textarea id="prompt" rows="8"></textarea>
+                <textarea id="prompt" rows="8"></textarea>
                 <script>
-                    const placeholderText = `Examples:
-                            Topic: web security
-                            List 5 blog post titles for beginners.
-
-                            Topic: Explanation
-                            Explain SQL injection in simple words. Use short sentences.`;
-
+                    const placeholderText = `Enter your prompt or try one of our sample attacks from the buttons below.`;
                     document.getElementById('prompt').placeholder = placeholderText;
                 </script>
 
@@ -81,7 +69,7 @@
     </div>
 
     <script src="/js/form-handler.js"></script>
-    <%- include('partials/footer', { frontendVersion: '0.9.3' }) %>
+    <%- include('partials/footer', { frontendVersion: '0.9.4' }) %>
 </body>
 </html>
 
