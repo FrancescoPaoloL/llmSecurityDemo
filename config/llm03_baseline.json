@@ -1,0 +1,11 @@
+{
+  "models": {
+    "default": {
+      "baseline_mean": 15.0,
+      "baseline_stddev": 5.0,
+      "threshold": 25.0,
+      "note": "Placeholder - replace with real baseline"
+    }
+  }
+}
+

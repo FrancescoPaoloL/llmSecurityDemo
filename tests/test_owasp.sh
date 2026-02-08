@@ -43,7 +43,7 @@ run_test() {
         TOTAL=$((TOTAL + 1))
 
         # Run detection (detect-only mode, no model needed)
-        result=$("$BINARY" --detect-only --prompt "$prompt" 2>/dev/null || echo '{"category":"ERROR"}')
+        result=$("$BINARY" --skip_llm_generation --prompt "$prompt" 2>/dev/null || echo '{"category":"ERROR"}')
 
         # Parse category from JSON
         detected_category=$(echo "$result" | grep -o '"category": *"[^"]*"' | cut -d'"' -f4)
