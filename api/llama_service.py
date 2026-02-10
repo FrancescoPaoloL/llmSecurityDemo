@@ -52,7 +52,7 @@ class LlamaService:
             result = subprocess.run(
                 [
                     str(self.detection_binary),
-                    "--detect-only",
+                    "--skip_llm_generation",
                     "--prompt", str(prompt),
                     "--response", str(response)
                 ],
