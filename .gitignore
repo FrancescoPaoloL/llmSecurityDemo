@@ -49,3 +49,4 @@ llama.cpp/common/
 llama.cpp/src/
 
 llama.cpp/build/
+tests/test_owasp.sh.bak

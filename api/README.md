@@ -71,5 +71,5 @@ process_prompt()
     ├──► generate_response()  ──► HTTP POST localhost:8081/completion
     │                              └── returns: content, tokens, time
     │
-    └──► detect_category()    ──► subprocess: owasp-llm-tool --detect-only
+    └──► detect_category()    ──► subprocess: owasp-llm-tool --skip_llm_detection
                                    └── returns: LLM01/02/06/unknown

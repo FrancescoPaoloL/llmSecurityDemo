@@ -17,7 +17,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 # Categories
-CATEGORIES=("llm01" "llm02" "llm04" "llm06")
+CATEGORIES=("llm01" "llm02" "llm03" "llm04" "llm06")
 
 # Create results dir
 mkdir -p "$RESULTS_DIR"
@@ -42,8 +42,20 @@ run_test() {
 
         TOTAL=$((TOTAL + 1))
 
-        # Run detection (detect-only mode, no model needed)
-        result=$("$BINARY" --skip_llm_generation --prompt "$prompt" 2>/dev/null || echo '{"category":"ERROR"}')
+        # Run detection (load model only for LLM03)
+        if [ "$expected_category" = "LLM03" ]; then
+            # LLM03 requires model for perplexity calculation
+            MODEL=$(ls ./models/*.gguf 2>/dev/null | head -1)
+            if [ -z "$MODEL" ]; then
+                echo -e "${RED}Error:${NC} No model found for LLM03 testing"
+                result='{"category":"ERROR"}'
+            else
+                result=$("$BINARY" "$MODEL" "$prompt" 2>/dev/null || echo '{"category":"ERROR"}')
+            fi
+        else
+            # Other categories use pattern-based detection (no model needed)
+            result=$("$BINARY" --skip_llm_generation --prompt "$prompt" 2>/dev/null || echo '{"category":"ERROR"}')
+        fi
 
         # Parse category from JSON
         detected_category=$(echo "$result" | grep -o '"category": *"[^"]*"' | cut -d'"' -f4)
@@ -73,6 +85,7 @@ run_test() {
 # Function: Test category
 test_category() {
     local cat=$1
+
     echo ""
     echo "========================================"
     echo "Testing Category: ${cat^^}"
@@ -129,4 +142,3 @@ main() {
 }
 
 main "$@"
-
