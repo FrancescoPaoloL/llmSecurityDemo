@@ -55,7 +55,7 @@ done
 
 echo "Starting Node.js frontend on port 3000..."
 cd /app/frontend
-node main.js &
+node app.js &
 FRONTEND_PID=$!
 
 sleep 3

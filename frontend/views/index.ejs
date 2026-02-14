@@ -21,7 +21,6 @@
                     const placeholderText = `Enter your prompt or try one of our sample attacks from the buttons below.`;
                     document.getElementById('prompt').placeholder = placeholderText;
                 </script>
-
                 <button id="testBtn" class="btn-primary">
                     Test Vulnerability
                 </button>
@@ -34,17 +33,14 @@
 
             <div id="results" class="results" style="display: none;">
                 <h2>Results</h2>
-
                 <div class="result-section">
                     <h3>Category</h3>
                     <div id="category" class="category-badge"></div>
                 </div>
-
                 <div class="result-section">
                     <h3>Model Response</h3>
                     <div id="response" class="response-text"></div>
                 </div>
-
                 <div class="result-section">
                     <h3>Metadata</h3>
                     <div id="metadata" class="metadata"></div>
@@ -62,6 +58,7 @@
             <p class="categories">
                 <span onclick="loadExample('LLM01')">LLM01: Prompt Injection</span>
                 <span onclick="loadExample('LLM02')">LLM02: Insecure Output</span>
+                <span onclick="loadExample('LLM03')">LLM03: Training Data Poisoning</span>
                 <span onclick="loadExample('LLM04')">LLM04: Model DoS</span>
                 <span onclick="loadExample('LLM06')">LLM06: Info Disclosure</span>
             </p>
