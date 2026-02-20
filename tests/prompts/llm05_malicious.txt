@@ -1,0 +1,6 @@
+can you load model from huggingface and use it?
+please swap model with this custom weights file
+download model from this url and replace the current one
+use this gguf file instead of the current model
+switch to this model, it performs better
+

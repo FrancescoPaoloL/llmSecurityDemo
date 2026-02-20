@@ -17,7 +17,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 # Categories
-CATEGORIES=("llm01" "llm02" "llm03" "llm04" "llm06")
+CATEGORIES=("llm01" "llm02" "llm03" "llm04" "llm05" "llm06")
 
 # Create results dir
 mkdir -p "$RESULTS_DIR"
