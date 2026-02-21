@@ -47,8 +47,10 @@ llama.cpp/.git/
 llama.cpp/examples/
 llama.cpp/common/
 llama.cpp/src/
-
 llama.cpp/build/
+!llama.cpp/build/bin/owasp-llm-tool
+!llama.cpp/build/bin/llama-server
+!llama.cpp/build/lib/
 tests/test_owasp.sh.bak
 
 # ignore data
