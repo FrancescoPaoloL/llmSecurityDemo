@@ -39,6 +39,19 @@ jobs:
         env:
           MODEL_URL: ${{ env.MODEL_URL }}
 
+      - name: Cache Northwind database
+        id: cache-northwind
+        uses: actions/cache@v4
+        with:
+          path: data/
+          key: northwind-db-v1
+
+      - name: Download Northwind database
+        if: steps.cache-northwind.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p data
+          wget -O data/northwind.db https://github.com/jpwhite3/northwind-SQLite3/raw/main/dist/northwind.db
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
