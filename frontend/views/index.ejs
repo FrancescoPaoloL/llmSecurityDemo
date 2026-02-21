@@ -12,7 +12,6 @@
             <h1>OWASP LLM Security Demo</h1>
             <p class="subtitle">Test LLM vulnerabilities based on OWASP Top 10</p>
         </header>
-
         <main>
             <div class="input-section">
                 <label for="prompt">Enter your test prompt:</label>
@@ -25,12 +24,10 @@
                     Test Vulnerability
                 </button>
             </div>
-
             <div id="loading" class="loading" style="display: none;">
                 <div class="spinner"></div>
                 <p>Analyzing prompt... (~20 seconds)</p>
             </div>
-
             <div id="results" class="results" style="display: none;">
                 <h2>Results</h2>
                 <div class="result-section">
@@ -46,13 +43,31 @@
                     <div id="metadata" class="metadata"></div>
                 </div>
             </div>
-
             <div id="error" class="error" style="display: none;">
                 <h3>Error!!!</h3>
                 <p id="errorMsg"></p>
             </div>
         </main>
-
+        <section class="plugin-demo">
+            <h2>Plugin Demo (LLM07)</h2>
+            <div class="plugin-controls">
+                <label for="pluginQuery">SQL Query:</label>
+                <textarea id="pluginQuery" rows="3"></textarea>
+                <div class="plugin-buttons">
+                    <button id="runUnsafe" class="btn-danger">Run Unsafe</button>
+                    <button id="runSafe" class="btn-safe">Run Safe</button>
+                </div>
+                <div class="plugin-examples">
+                    <span onclick="loadPluginExample('LLM01')">LLM01: Injection via plugin</span>
+                    <span onclick="loadPluginExample('LLM02')">LLM02: SQL via output</span>
+                    <span onclick="loadPluginExample('LLM07')">LLM07: UNION bypass</span>
+                </div>
+            </div>
+            <div id="pluginResults" class="plugin-results" style="display: none;">
+                <div id="pluginWarning" class="plugin-warning" style="display: none;"></div>
+                <div id="pluginTable" class="plugin-table"></div>
+            </div>
+        </section>
         <footer>
             <p>Educational project - OWASP LLM Top 10 Implementation</p>
             <p class="categories">
@@ -65,9 +80,7 @@
             </p>
         </footer>
     </div>
-
     <script src="/js/form-handler.js"></script>
     <%- include('partials/footer', { frontendVersion: '0.10.2' }) %>
 </body>
 </html>
-

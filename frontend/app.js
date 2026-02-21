@@ -79,6 +79,29 @@ app.post('/api/test', async (req, res) => {
     }
 });
 
+// Proxy endpoint for plugin queries (LLM07)
+app.post('/api/plugin/query', async (req, res) => {
+    try {
+        const { query, mode } = req.body;
+        if (!query) {
+            return res.status(400).json({ error: 'Missing query field' });
+        }
+        console.log(`[PLUGIN] Query: "${query.substring(0, 50)}" mode: ${mode}`);
+        const response = await axios.post(`${FLASK_API_URL}/api/plugin/query`, {
+            query, mode
+        }, { timeout: 10000 });
+        res.json(response.data);
+    } catch (error) {
+        console.error('[PLUGIN] Error:', error.message);
+        if (error.code === 'ECONNREFUSED') {
+            return res.status(503).json({ error: 'Flask API not available' });
+        }
+        if (error.response) {
+            return res.status(error.response.status).json(error.response.data);
+        }
+        res.status(500).json({ error: 'Internal server error', detail: error.message });
+    }
+});
 
 // Version endpoint proxy
 app.get('/api/version', async (req, res) => {

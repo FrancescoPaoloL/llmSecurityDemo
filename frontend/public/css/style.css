@@ -219,3 +219,119 @@ footer {
     transform: translateY(0);
 }
 
+.plugin-demo {
+    padding: 40px 30px;
+    border-top: 1px solid #2d3748;
+}
+
+.plugin-demo h2 {
+    color: #6ba5d6;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.plugin-controls {
+    margin-bottom: 20px;
+}
+
+.plugin-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: #ffffff;
+    border: none;
+    padding: 12px 30px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(231, 76, 60, 0.5);
+}
+
+.btn-safe {
+    background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+    color: #ffffff;
+    border: none;
+    padding: 12px 30px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-safe:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(39, 174, 96, 0.5);
+}
+
+.plugin-examples {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.plugin-examples span {
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: 500;
+    background: #2d3748;
+    color: #c5d3e8;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.plugin-examples span:hover {
+    background: #1a73e8;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.4);
+}
+
+.plugin-warning {
+    background: #2a1215;
+    border-left: 4px solid #d9534f;
+    color: #f5c2c7;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.plugin-table {
+    overflow-x: auto;
+}
+
+.plugin-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.plugin-table th {
+    background: #2d3748;
+    color: #6ba5d6;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.plugin-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #2d3748;
+    color: #e6e6e6;
+}
+
+.plugin-table tr:hover td {
+    background: #1a1d2e;
+}

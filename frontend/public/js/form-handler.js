@@ -15,36 +15,41 @@ function loadExample(category) {
     document.getElementById('prompt').focus();
 }
 
+// Plugin Demo - LLM07
+const pluginExamples = {
+    'LLM01': "SELECT * FROM Customers WHERE City='Berlin'; DROP TABLE Orders--",
+    'LLM02': "SELECT * FROM Customers WHERE 1=1",
+    'LLM07': "SELECT CustomerID FROM Customers UNION SELECT EmployeeID FROM Employees--"
+};
+
+function loadPluginExample(category) {
+    document.getElementById('pluginQuery').value = pluginExamples[category];
+    document.getElementById('pluginQuery').focus();
+}
+
 // Wait until the page is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Get references to HTML elements
     const promptInput = document.getElementById('prompt');
     const testBtn = document.getElementById('testBtn');
     const loading = document.getElementById('loading');
     const results = document.getElementById('results');
     const error = document.getElementById('error');
 
-    // Handle button click
     testBtn.addEventListener('click', async () => {
-        // Validate input
         const prompt = promptInput.value.trim();
         if (!prompt) {
             showError('Please enter a prompt');
             return;
         }
 
-        // Prepare the UI
         hideAll();
         loading.style.display = 'block';
         testBtn.disabled = true;
 
-        // Send the prompt to the backend
         try {
             const response = await fetch('/api/test', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ prompt })
             });
 
@@ -67,15 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function displayResults(data) {
         hideAll();
 
-        // Category
         const categoryDiv = document.getElementById('category');
         categoryDiv.textContent = data.category;
         categoryDiv.className = `category-badge cat-${data.category.toLowerCase()}`;
 
-        // Response
         document.getElementById('response').textContent = data.response;
 
-        // Metadata
         const metadata = data.metadata;
         let metadataHTML = `
             <p><strong>Prompt Tokens:</strong> ${metadata.tokens_prompt}</p>
@@ -84,13 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <p><strong>Stop Reason:</strong> ${metadata.stop_reason}</p>
         `;
 
-        // Add perplexity if present (LLM03 detection)
         if (metadata.perplexity !== undefined && metadata.perplexity !== null) {
             metadataHTML += `<p><strong>Perplexity:</strong> ${metadata.perplexity.toFixed(2)}</p>`;
         }
 
         document.getElementById('metadata').innerHTML = metadataHTML;
-
         results.style.display = 'block';
     }
 
@@ -106,3 +106,56 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Plugin Demo - independent section
+document.addEventListener('DOMContentLoaded', () => {
+    const pluginQuery = document.getElementById('pluginQuery');
+    pluginQuery.value = "SELECT * FROM Customers WHERE City='Berlin'";
+    pluginQuery.placeholder = "Try: DELETE FROM Customers WHERE CustomerID='ALFKI' (blocked in safe mode)\nTry: SELECT CustomerID FROM Customers UNION SELECT EmployeeID FROM Employees-- (bypasses safe mode)";
+
+    async function runPluginQuery(mode) {
+        const query = pluginQuery.value.trim();
+        if (!query) return;
+
+        try {
+            const response = await fetch('/api/plugin/query', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query, mode })
+            });
+            const data = await response.json();
+            displayPluginResults(data);
+        } catch (err) {
+            console.error('Plugin error:', err);
+        }
+    }
+
+    function displayPluginResults(data) {
+        const warning = document.getElementById('pluginWarning');
+        const table = document.getElementById('pluginTable');
+        const results = document.getElementById('pluginResults');
+
+        if (data.warning) {
+            warning.textContent = data.warning;
+            warning.style.display = 'block';
+            table.innerHTML = '';
+        } else {
+            warning.style.display = 'none';
+            table.innerHTML = data.results.length
+                ? buildTable(data.results)
+                : '<p>No results.</p>';
+        }
+        results.style.display = 'block';
+    }
+
+    function buildTable(rows) {
+        const headers = Object.keys(rows[0]);
+        const ths = headers.map(h => `<th>${h}</th>`).join('');
+        const trs = rows.map(row =>
+            `<tr>${headers.map(h => `<td>${row[h] ?? ''}</td>`).join('')}</tr>`
+        ).join('');
+        return `<table><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table>`;
+    }
+
+    document.getElementById('runUnsafe').addEventListener('click', () => runPluginQuery('unsafe'));
+    document.getElementById('runSafe').addEventListener('click', () => runPluginQuery('safe'));
+});
