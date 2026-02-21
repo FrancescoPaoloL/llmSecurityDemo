@@ -36,6 +36,10 @@ RUN cd /app/frontend && \
     npm cache clean --force
 
 COPY --chown=nobody:nogroup ./api /app/api
+
+RUN mkdir -p /app/data
+COPY --chown=nobody:nogroup ./data/northwind.db /app/data/northwind.db
+
 COPY --chown=nobody:nogroup ./frontend /app/frontend
 
 RUN echo "BINARY_PATH=/app/binary/owasp-llm-tool" > /app/api/.env && \

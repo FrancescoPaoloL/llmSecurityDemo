@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from config import Config
 from routes import health_bp, test_bp, version_bp
+from routes.plugin import plugin_bp
 from error import register_error_handlers
 from __version__ import __version__
 
@@ -19,6 +20,7 @@ except (ValueError, FileNotFoundError) as e:
 app.register_blueprint(health_bp)
 app.register_blueprint(test_bp)
 app.register_blueprint(version_bp)
+app.register_blueprint(plugin_bp)
 register_error_handlers(app)
 
 if __name__ == '__main__':
