@@ -13,13 +13,90 @@ body {
     padding: 20px;
 }
 
-.container {
-    max-width: 900px;
+/* Two-column layout */
+.page-wrapper {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
     margin: 0 auto;
+}
+
+.container {
+    flex: 1;
+    min-width: 0;
     background: #1a1d2e;
     border-radius: 10px;
     box-shadow: 0 10px 40px rgba(0,0,0,0.6);
     overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+    background: #1a1d2e;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    padding: 20px;
+}
+
+.sidebar h3 {
+    color: #6ba5d6;
+    font-size: 1em;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.sidebar-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-buttons button {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.82em;
+    font-weight: 500;
+    background: #2d3748;
+    color: #c5d3e8;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    text-align: left;
+}
+
+.sidebar-buttons button:hover {
+    background: #1a73e8;
+    color: #ffffff;
+    transform: translateX(3px);
+    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.4);
+}
+
+.sidebar-buttons button:active {
+    transform: translateX(0);
+}
+
+/* Responsive: sidebar goes below on narrow screens */
+@media (max-width: 900px) {
+    .page-wrapper {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        position: static;
+    }
+    .sidebar-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .sidebar-buttons button {
+        flex: 1 1 auto;
+        text-align: center;
+    }
 }
 
 header {
@@ -153,10 +230,10 @@ textarea:focus {
 }
 
 .cat-llm01 { background: #e74c3c; color: #ffffff; }
-.cat-llm02 { background: #000000 ; color: #ffffff;}
+.cat-llm02 { background: #000000; color: #ffffff; }
 .cat-llm04 { background: #d68910; color: #ffffff; }
 .cat-llm06 { background: #1a73e8; color: #ffffff; }
-.cat-unknown { background: #576574; color: #ffffff;}
+.cat-unknown { background: #576574; color: #ffffff; }
 
 .response-text {
     background: #0d1117;
@@ -187,36 +264,6 @@ footer {
     text-align: center;
     border-top: 1px solid #2d3748;
     color: #9ca3af;
-}
-
-.categories {
-    margin-top: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-}
-
-.categories span {
-    padding: 5px 15px;
-    border-radius: 15px;
-    font-size: 0.85em;
-    font-weight: 500;
-    background: #2d3748;
-    color: #c5d3e8;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.categories span:hover {
-    background: #1a73e8;
-    color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.4);
-}
-
-.categories span:active {
-    transform: translateY(0);
 }
 
 .plugin-demo {
