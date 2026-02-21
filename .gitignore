@@ -50,3 +50,7 @@ llama.cpp/src/
 
 llama.cpp/build/
 tests/test_owasp.sh.bak
+
+# ignore data
+/data/northwind.db
+
