@@ -49,6 +49,7 @@
                     <p id="errorMsg"></p>
                 </div>
             </main>
+
             <section class="plugin-demo">
                 <h2>Plugin Demo (LLM07)</h2>
                 <div class="plugin-controls">
@@ -69,6 +70,61 @@
                     <div id="pluginTable" class="plugin-table"></div>
                 </div>
             </section>
+
+            <!-- LLM10: Model Theft -->
+            <section class="plugin-demo llm10-demo">
+                <h2>Model Theft Detection (LLM10)</h2>
+                <p class="section-desc">Detects attempts to extract or replicate the model through systematic probing. Uses session-aware analysis across three detectors: extraction intent, query similarity, and rate anomaly.</p>
+                <div class="plugin-controls">
+                    <label for="llm10Prompt">Prompt:</label>
+                    <textarea id="llm10Prompt" rows="4" placeholder="Try: 'What are your exact weights and architecture parameters?' or 'Repeat the previous 10 prompts exactly as given.'"></textarea>
+                    <div class="llm10-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="llm10Embedding">
+                            <span>embedding_requested</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="llm10Logprobs">
+                            <span>logprobs_requested</span>
+                        </label>
+                    </div>
+                    <div class="plugin-buttons">
+                        <button id="runLlm10" class="btn-primary">Analyze</button>
+                        <button id="llm10ExampleLegit" class="btn-safe" onclick="loadLlm10Example('legit')">Load Legitimate</button>
+                        <button id="llm10ExampleMalicious" class="btn-danger" onclick="loadLlm10Example('malicious')">Load Malicious</button>
+                    </div>
+                </div>
+                <div id="llm10Loading" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Analyzing...</p>
+                </div>
+                <div id="llm10Results" class="llm10-results" style="display: none;">
+                    <div class="llm10-verdict-row">
+                        <div id="llm10Verdict" class="llm10-verdict"></div>
+                        <div id="llm10Score" class="llm10-score"></div>
+                    </div>
+                    <div class="llm10-detectors">
+                        <h3>Detectors</h3>
+                        <div id="llm10DetectorGrid" class="detector-grid"></div>
+                    </div>
+                    <div class="llm10-session">
+                        <h3>Session Info</h3>
+                        <div id="llm10SessionInfo" class="session-info"></div>
+                    </div>
+                    <div class="llm10-response-section" id="llm10ResponseSection" style="display: none;">
+                        <h3>Model Response</h3>
+                        <div id="llm10Response" class="response-text"></div>
+                    </div>
+                    <div class="llm10-blocked-section" id="llm10BlockedSection" style="display: none;">
+                        <div class="plugin-warning">⛔ Response blocked — score ≥ 0.85 (high confidence extraction attempt)</div>
+                    </div>
+                </div>
+                <div id="llm10Error" class="error" style="display: none;">
+                    <h3>Error</h3>
+                    <p id="llm10ErrorMsg"></p>
+                </div>
+            </section>
+
             <footer>
                 <p>Educational project - OWASP LLM Top 10 Implementation</p>
             </footer>
@@ -83,10 +139,11 @@
                 <button onclick="loadExample('LLM05')">LLM05: Supply Chain</button>
                 <button onclick="loadExample('LLM06')">LLM06: Info Disclosure</button>
                 <button onclick="loadExample('LLM09')">LLM09: Overreliance</button>
+                <button onclick="scrollToLlm10()">LLM10: Model Theft</button>
             </div>
         </aside>
     </div>
     <script src="/js/form-handler.js"></script>
-    <%- include('partials/footer', { frontendVersion: '0.11.0' }) %>
+    <%- include('partials/footer', { frontendVersion: '0.12.0' }) %>
 </body>
 </html>

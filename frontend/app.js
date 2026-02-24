@@ -103,6 +103,29 @@ app.post('/api/plugin/query', async (req, res) => {
     }
 });
 
+app.post('/api/llm10', async (req, res) => {
+    try {
+        const { prompt, max_tokens, embedding_requested, logprobs_requested } = req.body;
+        if (!prompt) {
+            return res.status(400).json({ error: 'Missing prompt field' });
+        }
+        console.log(`[LLM10] Prompt: "${prompt.substring(0, 50)}" embed:${embedding_requested} logprobs:${logprobs_requested}`);
+        const response = await axios.post(`${FLASK_API_URL}/api/llm10`, {
+            prompt, max_tokens, embedding_requested, logprobs_requested
+        }, { timeout: 30000 });
+        res.json(response.data);
+    } catch (error) {
+        console.error('[LLM10] Error:', error.message);
+        if (error.code === 'ECONNREFUSED') {
+            return res.status(503).json({ error: 'Flask API not available' });
+        }
+        if (error.response) {
+            return res.status(error.response.status).json(error.response.data);
+        }
+        res.status(500).json({ error: 'Internal server error', detail: error.message });
+    }
+});
+
 // Version endpoint proxy
 app.get('/api/version', async (req, res) => {
     try {
