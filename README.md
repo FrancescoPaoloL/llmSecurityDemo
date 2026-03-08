@@ -127,6 +127,10 @@ Features:
 - **98.6% accuracy** with 1 known false positive (LLM01: "ignore spam emails")
 - **English only**
 - **Basic heuristics** — this is a learning/portfolio project, not production security software
+- **CI/CD pipeline does not run tests automatically**: the `owasp-llm-tool` binary
+  is cross-compiled locally from the llama.cpp fork and committed pre-built.
+  Tests must be run manually before pushing (`./tests/test_owasp.sh`).
+
 
 ## References
 
