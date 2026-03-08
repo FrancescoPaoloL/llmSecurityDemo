@@ -65,7 +65,8 @@ class LlamaService:
                 capture_output=True,
                 text=True,
                 timeout=5,
-                check=False
+                check=False,
+                cwd="/app"
             )
 
             if result.returncode != 0:
@@ -85,7 +86,8 @@ class LlamaService:
                     capture_output=True,
                     text=True,
                     timeout=30,  # Longer timeout for model load
-                    check=False
+                    check=False,
+                    cwd="/app"
                 )
 
                 if result_perplexity.returncode == 0:
