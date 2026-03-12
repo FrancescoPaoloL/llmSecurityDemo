@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     nodejs \
     npm \
     curl \
+    libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 \
