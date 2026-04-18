@@ -1,34 +1,28 @@
 name: Docker Build & Push
-
 on:
   push:
     branches: [ main ]
     tags: [ 'v*' ]
   pull_request:
     branches: [ main ]
-
 env:
   REGISTRY: docker.io
   IMAGE_NAME: francescopaololezza/owasp-llm-demo
   MODEL_URL: https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/main/qwen2.5-0.5b-instruct-q4_0.gguf
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Cache model file
         id: cache-model
         uses: actions/cache@v4
         with:
           path: models/
           key: qwen-model-${{ hashFiles('models/SHA256SUMS') }}
-
       - name: Download and verify model
         if: steps.cache-model.outputs.cache-hit != 'true'
         run: |
@@ -38,33 +32,28 @@ jobs:
           cd models && sha256sum --strict --check SHA256SUMS
         env:
           MODEL_URL: ${{ env.MODEL_URL }}
-
       - name: Cache Northwind database
         id: cache-northwind
         uses: actions/cache@v4
         with:
           path: data/
           key: northwind-db-v1
-
       - name: Download Northwind database
         if: steps.cache-northwind.outputs.cache-hit != 'true'
         run: |
           mkdir -p data
           wget -O data/northwind.db https://github.com/jpwhite3/northwind-SQLite3/raw/main/dist/northwind.db
-
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
+        uses: docker/setup-buildx-action@v4
       - name: Log in to Docker Hub
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Extract metadata (tags, labels)
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ${{ env.IMAGE_NAME }}
           tags: |
@@ -73,10 +62,9 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=sha,prefix={{branch}}-
-
       - name: Build and push Docker image
         id: docker_build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./docker/Dockerfile
@@ -85,7 +73,6 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
       - name: Image digest
         run: echo "Image digest:${{ steps.docker_build.outputs.digest }}"
 
