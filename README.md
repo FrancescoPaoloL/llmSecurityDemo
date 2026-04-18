@@ -143,3 +143,7 @@ Features:
 
 MIT
 
+## Connect with me
+
+[LinkedIn](https://www.linkedin.com/in/francescopl/) · [Kaggle](https://www.kaggle.com/francescopaolol)
+
