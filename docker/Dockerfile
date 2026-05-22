@@ -20,7 +20,7 @@ RUN mkdir -p /app/binary
 COPY --chown=nobody:nogroup ./llama.cpp/build/bin/owasp-llm-tool /app/binary/
 COPY --chown=nobody:nogroup ./llama.cpp/build/bin/llama-server /app/binary/
 COPY --chown=nobody:nogroup ./llama.cpp/build/lib/*.so* /app/binary/
-ENV LD_LIBRARY_PATH=/app/binary:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/app/binary
 
 RUN mkdir -p /app/models
 COPY --chown=nobody:nogroup ./models/qwen2.5-0.5b-instruct-q4_0.gguf /app/models/
@@ -42,7 +42,6 @@ RUN mkdir -p /app/data
 COPY --chown=nobody:nogroup ./data/northwind.db /app/data/northwind.db
 
 COPY --chown=nobody:nogroup ./config /app/config
-
 COPY --chown=nobody:nogroup ./frontend /app/frontend
 
 RUN echo "BINARY_PATH=/app/binary/owasp-llm-tool" > /app/api/.env && \
@@ -63,6 +62,5 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
     CMD curl -f http://localhost:3000/ || exit 1
 
 USER nobody
-
 ENTRYPOINT ["/entrypoint.sh"]
 
