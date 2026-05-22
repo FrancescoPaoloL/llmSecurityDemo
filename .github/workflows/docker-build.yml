@@ -26,10 +26,10 @@ jobs:
       contents: read
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Cache model file
         id: cache-model
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: models/
           key: qwen-model-${{ hashFiles('models/SHA256SUMS') }}
@@ -44,7 +44,7 @@ jobs:
           MODEL_URL: ${{ env.MODEL_URL }}
       - name: Cache Northwind database
         id: cache-northwind
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: data/
           key: northwind-db-v1
@@ -74,7 +74,7 @@ jobs:
             type=sha,prefix={{branch}}-
       - name: Build and push Docker image
         id: docker_build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: ./docker/Dockerfile
