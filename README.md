@@ -1,7 +1,7 @@
 # OWASP LLM Security Demo
 
 [![Docker Build](https://github.com/FrancescoPaoloL/llmSecurityDemo/actions/workflows/docker-build.yml/badge.svg)](https://github.com/FrancescoPaoloL/llmSecurityDemo/actions)
-![Tests](https://img.shields.io/badge/tests-70%2F71%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-88%2F90%20passing-brightgreen)
 ![Categories](https://img.shields.io/badge/OWASP%20categories-9%2F10-blue)
 
 A detection tool for OWASP Top 10 LLM vulnerabilities using pattern matching, perplexity-based analysis, and session-aware scoring.
@@ -69,12 +69,20 @@ See [docs/architecture.md](docs/architecture.md) for details.
 | LLM04 | Model Denial of Service | Pattern matching | ✅ Done | 1/1 |
 | LLM05 | Supply Chain Vulnerabilities | Pattern matching | ✅ Done | 7/7 |
 | LLM06 | Excessive Agency | Pattern matching | ✅ Done | 9/9 |
+| LLM02:2025 | Sensitive Information Disclosure | Pattern matching | ✅ Done | 8/9 |
+| LLM06:2025 | Excessive Agency | Scored (2/3 signals) | ✅ Done | 10/10 |
 | LLM07 | Insecure Plugin Design | SQLite plugin + HTTP tests | ✅ Done | 6/6 |
 | LLM08 | Excessive Agency | - | ❌ Duplicate | - |
 | LLM09 | Overreliance / Misinformation | Dual-path scoring (5 sub-detectors) | ✅ Done | 9/9 |
 | LLM10 | Model Theft | Session-aware scoring (3 sub-detectors) | ✅ Done | 18/18 |
 
 **Overall: 9/10 categories implemented | 70/71 internal tests passing**
+
+**Overall (2023 numbering): 9/10 categories implemented | 70/71 internal tests passing**
+
+**OWASP 2025 (v2.0) migration status**: LLM08:2025 Vector and Embedding Weaknesses pending (requires choosing a vector DB). 
+Full renumbering to final 2025 category IDs not yet done;  new detectors use temporary 'LLMxx:2025' labels to avoid colliding 
+with existing 2023-numbered detectors.
 
 **Detection Methods:**
 
@@ -92,7 +100,7 @@ See [tests/TESTING.md](tests/TESTING.md) for detailed test results.
 ## Testing
 
 ```
-./tests/test_owasp.sh           # All categories (pattern + perplexity) — 52/53
+./tests/test_owasp.sh           # All categories (pattern + perplexity) — 70/72
 ./tests/test_owasp.sh llm03     # Specific category (loads model)
 ./tests/test_owasp.sh llm09     # Overreliance / misinformation
 ./tests/test_llm10.sh           # Model theft — requires Flask running — 18/18
