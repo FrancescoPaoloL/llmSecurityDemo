@@ -31,7 +31,7 @@ User → form-handler.js → app.js → Flask API :5000
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/api/test` | POST | Main vulnerability detection (LLM01–LLM06, LLM09) |
+| `/api/test` | POST | Main vulnerability detection (LLM01–LLM06, LLM09, LLM02:2025, LLM06:2025) |
 | `/api/plugin/query` | POST | SQLite plugin demo (LLM07) |
 | `/api/llm10` | POST | Model Theft detection (LLM10, session-aware) |
 | `/api/version` | GET | API version info |

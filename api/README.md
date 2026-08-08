@@ -29,7 +29,7 @@ python server.py
 
 | Method | Path | Description |
 |--------|------|-------------|
-| POST | /api/test | Process prompt and detect OWASP category (LLM01–LLM06, LLM09) |
+| POST | /api/test | Process prompt and detect OWASP category (LLM01–LLM06, LLM09, LLM02:2025, LLM06:2025) |
 | POST | /api/plugin/query | SQLite plugin demo (LLM07) |
 | POST | /api/llm10 | Model Theft detection (LLM10, session-aware) |
 | GET | /api/version | API version info |
@@ -99,7 +99,7 @@ curl -X POST http://localhost:5000/api/llm10 \
     │                              └── llama-server (Qwen 2.5 0.5B)
     │
     └──► detect_category()    ──► subprocess: owasp-llm-tool --skip_llm_generation
-                                   ├── pattern matching: LLM01/02/04/05/06
+                                   ├── pattern matching: LLM01/02/04/05/06 (+ LLM02:2025, LLM06:2025)
                                    └── perplexity: LLM03 (if model loaded)
 
 /api/plugin/query
@@ -118,7 +118,7 @@ curl -X POST http://localhost:5000/api/llm10 \
 **Pattern-based (default):**
 - `--skip_llm_generation` flag
 - No model required
-- Returns: LLM01/02/04/05/06/unknown
+- Returns: LLM01/02/02:2025/04/05/06/06:2025/unknown
 - Fast: <100ms
 
 **Perplexity-based (LLM03):**
