@@ -138,6 +138,7 @@ Features:
 * **Test suite is internal**: 70/71 passing measures consistency against rules I wrote myself, not generalization to unseen attacks. 1 known false positive (LLM01: "ignore spam emails").
 * **English only**
 * **CI/CD pipeline does not run tests automatically**: the `owasp-llm-tool` binary is cross-compiled locally from the llama.cpp fork and committed pre-built. Tests must be run manually before pushing (`./tests/test_owasp.sh`).
+* **LLM02:2025 Sensitive Info Disclosure**: 1 known false positive (educational questions containing sensitive-data keywords, e.g. "how do social security numbers work")
 
 ## References
 
