@@ -30,7 +30,10 @@ def execute_query(query: str) -> list:
 def query():
     data = request.get_json()
     sql = data.get('query', '').strip()
-    mode = data.get('mode', 'unsafe')
+    # Safe unless the caller asks for the vulnerable path explicitly: this
+    # endpoint is reachable through the published frontend port without
+    # authentication, so the demo's "unsafe" mode must be opt-in.
+    mode = data.get('mode', 'safe')
 
     if not sql:
         return jsonify({'error': 'No query provided'}), 400
