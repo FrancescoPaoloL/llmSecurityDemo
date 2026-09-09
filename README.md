@@ -35,6 +35,8 @@ docker-compose up -d
 http://localhost:3000
 ```
 
+Run it on localhost only: the API has no authentication by design, and the plugin endpoint executes SQL against the demo database for anyone who can reach port 3000.
+
 ### Docker Hub
 
 ```
